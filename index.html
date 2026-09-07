@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Rome · 8–11 septembre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stone:#F1EFE9;
+    --stone-deep:#E4E0D6;
+    --ink:#191817;
+    --ink-soft:#5C5852;
+    --rail:#3C4A52;
+    --flag:#8A6A2F;
+    --done:#9A968D;
+    --panel:#FFFFFF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --stone:#16181A;
+      --stone-deep:#33383C;
+      --ink:#F2F0EB;
+      --ink-soft:#B8B4AC;
+      --rail:#9CC4D6;
+      --flag:#E0B863;
+      --done:#6B6862;
+      --panel:#22262A;
+    }
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--stone);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.5;
+    padding-bottom:3rem;
+  }
+
+  header.top{
+    padding:1.6rem 1.1rem 1rem;
+    border-bottom:2px solid var(--ink);
+  }
+  header.top h1{
+    font-family:"Cormorant Garamond",Georgia,serif;
+    font-weight:600;
+    font-size:2.6rem;
+    line-height:1;
+    margin:0;
+    letter-spacing:.01em;
+  }
+  header.top p{
+    margin:.45rem 0 0;
+    color:var(--ink-soft);
+    font-size:.95rem;
+  }
+
+  nav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    display:flex;
+    gap:.4rem;
+    padding:.55rem 1.1rem;
+    background:var(--stone);
+    border-bottom:1px solid var(--stone-deep);
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav::-webkit-scrollbar{display:none}
+  nav a{
+    flex:0 0 auto;
+    text-decoration:none;
+    color:var(--ink);
+    font-size:.9rem;
+    font-weight:500;
+    padding:.45rem .8rem;
+    border:1px solid var(--ink);
+    border-radius:2px;
+    background:transparent;
+  }
+  nav a:focus-visible{outline:3px solid var(--rail);outline-offset:2px}
+
+  section{padding:0 1.1rem}
+
+  .day{
+    margin:2rem 0 .9rem;
+    border:2px solid var(--ink);
+    padding:.5rem .75rem .6rem;
+    background:var(--panel);
+  }
+  .day h2{
+    margin:0;
+    font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:1.5rem;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .day span{
+    display:block;
+    font-size:.9rem;
+    color:var(--ink-soft);
+    margin-top:.1rem;
+  }
+
+  ol{list-style:none;margin:0;padding:0}
+
+  li.stop{
+    display:grid;
+    grid-template-columns:3.6rem 1fr;
+    column-gap:.85rem;
+    padding:.95rem 0;
+    border-bottom:1px solid var(--stone-deep);
+    cursor:pointer;
+  }
+  li.stop:last-child{border-bottom:none}
+
+  .time{
+    font-variant-numeric:tabular-nums;
+    font-weight:600;
+    font-size:1rem;
+    color:var(--rail);
+    padding-top:.1rem;
+  }
+  .what{margin:0;font-weight:600;font-size:1.05rem}
+  .how{margin:.2rem 0 0;font-size:.9rem;color:var(--rail);font-weight:500}
+  .why{margin:.35rem 0 0;font-size:.93rem;color:var(--ink-soft)}
+
+  li.stop.done .what,
+  li.stop.done .how,
+  li.stop.done .why,
+  li.stop.done .time{color:var(--done);text-decoration:line-through;text-decoration-thickness:1px}
+
+  .flag{
+    display:inline-block;
+    margin-top:.4rem;
+    font-size:.85rem;
+    color:var(--flag);
+    border-left:3px solid var(--flag);
+    padding-left:.5rem;
+  }
+
+  .memo{
+    margin:2.4rem 0 0;
+    border-top:2px solid var(--ink);
+    padding-top:1rem;
+  }
+  .memo h2{
+    font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:1.5rem;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    margin:0 0 .6rem;
+  }
+  .memo ul{margin:0;padding-left:1.1rem}
+  .memo li{margin-bottom:.5rem;font-size:.95rem;color:var(--ink-soft)}
+  .memo strong{color:var(--ink);font-weight:600}
+
+  @media (prefers-reduced-motion:no-preference){
+    li.stop{transition:opacity .15s ease}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>Rome</h1>
+  <p>8 au 11 septembre · 59 Via Gela · touchez une étape pour la barrer</p>
+</header>
+
+<nav>
+  <a href="#mar">Mardi 8</a>
+  <a href="#mer">Mercredi 9</a>
+  <a href="#jeu">Jeudi 10</a>
+  <a href="#ven">Vendredi 11</a>
+  <a href="#memo">À retenir</a>
+</nav>
+
+<section>
+
+  <div class="day" id="mar">
+    <h2>Mardi 8</h2>
+    <span>Arrivée et quartier</span>
+  </div>
+  <ol>
+    <li class="stop">
+      <div class="time">12h</div>
+      <div>
+        <p class="what">Atterrissage Fiumicino</p>
+        <p class="how">Suivre « Treni / Train Station » depuis le terminal</p>
+        <p class="why">Train FL1 direct jusqu'à Roma Tuscolana, environ 40 min, 8 € par personne, un départ tous les quarts d'heure.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">14h</div>
+      <div>
+        <p class="what">Déjeuner · Tira e Molla</p>
+        <p class="how">Via Enna 2 · 10 min à pied de l'appart</p>
+        <p class="why">Service continu de 10h à 1h, donc aucun risque d'arriver trop tard. Pinsa et pâtes, beaucoup de Romains le soir.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">16h</div>
+      <div>
+        <p class="what">San Giovanni in Laterano</p>
+        <p class="how">15 min à pied · gratuit · ferme 18h30</p>
+        <p class="why">La cathédrale de Rome, plus ancienne que Saint-Pierre. Nef bordée des douze apôtres en statues colossales. La Scala Santa est juste en face, et une copie de la Louve trône sur la place.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">18h</div>
+      <div>
+        <p class="what">Colisée au coucher du soleil</p>
+        <p class="how">30 min à pied depuis San Giovanni · extérieur seulement</p>
+        <p class="why">Repérage pour demain, et la lumière de fin de journée sur la pierre vaut le détour.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">19h30</div>
+      <div>
+        <p class="what">Dîner · Osteria del Cavaliere</p>
+        <p class="how">Via Alba 32 · 5 min de l'appart · fermé dimanche</p>
+        <p class="why">La meilleure table du quartier. Travers de porc et gnocchi à la saucisse.</p>
+        <span class="flag">Réserver au +39 06 6485 0434</span>
+      </div>
+    </li>
+  </ol>
+
+  <div class="day" id="mer">
+    <h2>Mercredi 9</h2>
+    <span>Rome antique</span>
+  </div>
+  <ol>
+    <li class="stop">
+      <div class="time">8h30</div>
+      <div>
+        <p class="what">Colisée · billet Arena</p>
+        <p class="how">Entrée dédiée pour le billet Arena · ~1h30</p>
+        <p class="why">L'accès Arena vous met au niveau du sol des combats, là où les gladiateurs entraient. En dessous, les hypogées où l'on hissait bêtes et décors par des monte-charges.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">10h30</div>
+      <div>
+        <p class="what">Forum romain et Palatin</p>
+        <p class="how">Même billet · entrée Via Sacra ou Via di San Gregorio</p>
+        <p class="why">Le centre politique de l'empire, puis la colline où logeaient les empereurs. Prévoir de l'eau et un chapeau, il n'y a presque pas d'ombre.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">13h</div>
+      <div>
+        <p class="what">Déjeuner dans le Monti</p>
+        <p class="how">Juste derrière le Forum, 10 min à pied</p>
+        <p class="why">Quartier d'artisans devenu très vivant. Bien meilleur et moins cher que les terrasses au pied du Colisée.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">15h</div>
+      <div>
+        <p class="what">Musées du Capitole</p>
+        <p class="how">Entrée par le Palazzo dei Conservatori, à droite face à la statue équestre · ~2h</p>
+        <p class="why">La vraie Louve capitoline est ici, à l'étage. Également le Marc Aurèle en bronze original, le Tireur d'épine, et la terrasse du Tabularium d'où l'on domine tout le Forum.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">17h30</div>
+      <div>
+        <p class="what">Campidoglio et Vittoriano</p>
+        <p class="how">Sur place, puis 5 min à pied</p>
+        <p class="why">La place dessinée par Michel-Ange, avec la copie de la Louve sur sa colonne. Monter sur la terrasse du Vittoriano pour la meilleure vue panoramique de Rome.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">19h30</div>
+      <div>
+        <p class="what">Soirée au Trastevere</p>
+        <p class="how">Bus ou tram depuis Piazza Venezia</p>
+        <p class="why">Ruelles pavées, façades ocre et terrasses partout. C'est là que Rome est la plus vivante le soir.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="day" id="jeu">
+    <h2>Jeudi 10</h2>
+    <span>Vatican et centre historique</span>
+  </div>
+  <ol>
+    <li class="stop">
+      <div class="time">8h40</div>
+      <div>
+        <p class="what">Métro jusqu'au Vatican</p>
+        <p class="how">Ligne A, Ponte Lungo → Ottaviano · direct, 25 min</p>
+        <p class="why">Pas de changement, c'est le gros avantage de votre quartier.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">9h30</div>
+      <div>
+        <p class="what">Musées du Vatican et Chapelle Sixtine</p>
+        <p class="how">Créneau réservé · compter 3h</p>
+        <p class="why">Le parcours est à sens unique et se termine par la Sixtine. Ne pas se presser dans la galerie des Cartes ni les Chambres de Raphaël, qui valent autant que la fin.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">13h</div>
+      <div>
+        <p class="what">Déjeuner dans le Prati</p>
+        <p class="how">Quartier juste au nord des musées</p>
+        <p class="why">Résidentiel et bourgeois, sans les rabatteurs de la Via della Conciliazione.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">14h30</div>
+      <div>
+        <p class="what">Basilique Saint-Pierre</p>
+        <p class="how">Gratuite · file de sécurité plus courte l'après-midi · épaules et genoux couverts</p>
+        <p class="why">La Pietà de Michel-Ange est à droite en entrant, derrière une vitre. La montée à la coupole se paye à part et récompense par la vue sur toute la ville.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">16h30</div>
+      <div>
+        <p class="what">Retour à pied par le centre</p>
+        <p class="how">Château Saint-Ange → Piazza Navona → Panthéon → Trevi</p>
+        <p class="why">Le Panthéon a presque deux mille ans et sa coupole en béton reste la plus grande du monde sans armature. L'oculus est ouvert en permanence. Trevi est bondée en journée, elle se calme en soirée.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">19h</div>
+      <div>
+        <p class="what">Piazza di Spagna</p>
+        <p class="how">10 min à pied depuis Trevi · métro A Spagna pour rentrer</p>
+        <p class="why">Les marches à la tombée du jour, puis ligne A directe jusqu'à Ponte Lungo.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="day" id="ven">
+    <h2>Vendredi 11</h2>
+    <span>Rome baroque · vol à 22h25</span>
+  </div>
+  <ol>
+    <li class="stop">
+      <div class="time">10h</div>
+      <div>
+        <p class="what">Check-out et dépôt des bagages</p>
+        <p class="how">Chez l'hôte si possible, sinon consigne vers Termini ou Tuscolana</p>
+        <p class="why">Indispensable de s'en débarrasser : les musées imposent le vestiaire pour tous les sacs.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">11h</div>
+      <div>
+        <p class="what">Santa Maria della Vittoria</p>
+        <p class="how">Métro A jusqu'à Barberini puis 5 min à pied · gratuit</p>
+        <p class="why">L'Extase de sainte Thérèse du Bernin, dans une chapelle mise en scène comme un théâtre avec des loges de marbre de part et d'autre. Une petite église quelconque pour un chef-d'œuvre absolu.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">11h45</div>
+      <div>
+        <p class="what">Galleria Doria Pamphilj</p>
+        <p class="how">Via del Corso 305 · ~1h30 · rarement complet</p>
+        <p class="why">Palais privé encore habité par la famille. Tableaux accrochés du sol au plafond comme au XVIIe siècle, deux Caravage, et le portrait d'Innocent X par Vélasquez. L'audioguide est raconté par le prince lui-même.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">13h30</div>
+      <div>
+        <p class="what">Déjeuner dans le centre</p>
+        <p class="how">Autour du Panthéon ou de Sant'Eustachio</p>
+        <p class="why">Les églises ferment vers 12h30 et rouvrent vers 15h30, autant en profiter maintenant.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">15h</div>
+      <div>
+        <p class="what">San Luigi dei Francesi</p>
+        <p class="how">5 min du Panthéon · gratuit</p>
+        <p class="why">Les trois Caravage du cycle de saint Matthieu, dans la dernière chapelle à gauche. Sans lumière on ne voit presque rien.</p>
+        <span class="flag">Prévoir des pièces de 1 € pour la minuterie d'éclairage</span>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">15h45</div>
+      <div>
+        <p class="what">Sant'Ignazio</p>
+        <p class="how">5 min à pied · gratuit</p>
+        <p class="why">La coupole n'existe pas : c'est une peinture en trompe-l'œil sur une voûte plate. Un disque au sol marque l'endroit exact où l'illusion fonctionne.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">16h30</div>
+      <div>
+        <p class="what">Retour vers Via Gela</p>
+        <p class="how">Ligne A depuis Barberini ou Spagna</p>
+        <p class="why">Récupération des valises et dernier café dans le quartier.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">18h30</div>
+      <div>
+        <p class="what">Dîner rapide</p>
+        <p class="how">Tira e Molla, service continu</p>
+        <p class="why">C'est tôt pour l'Italie, mais eux servent en continu.</p>
+      </div>
+    </li>
+    <li class="stop">
+      <div class="time">19h20</div>
+      <div>
+        <p class="what">Train FL1 vers Fiumicino</p>
+        <p class="how">Roma Tuscolana · 10 min à pied de l'appart</p>
+        <p class="why">Arrivée à l'aéroport vers 20h10 pour un vol à 22h25. Vérifier les horaires du soir sur l'app Trenitalia le matin même.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="memo" id="memo">
+    <h2>À retenir</h2>
+    <ul>
+      <li><strong>Osteria del Cavaliere</strong> — réserver au +39 06 6485 0434, ouvre à 19h30, fermé le dimanche.</li>
+      <li><strong>Galerie Borghèse</strong> — complet, mais les annulations sont remises en ligne sur galleriaborghese.cultura.gov.it. Vérifier de temps en temps, y compris le matin même.</li>
+      <li><strong>Billet FL1</strong> — 8 € par personne. Le billet papier se valide avant de monter, celui de l'app Trenitalia non.</li>
+      <li><strong>Églises</strong> — fermées environ de 12h30 à 15h30, épaules et genoux couverts.</li>
+      <li><strong>Musées du Capitole</strong> — billet en ligne conseillé, pas indispensable.</li>
+      <li><strong>Vestiaire obligatoire</strong> dans les musées, quelle que soit la taille du sac.</li>
+    </ul>
+  </div>
+
+</section>
+
+<script>
+  document.querySelectorAll('li.stop').forEach(function(el){
+    el.setAttribute('tabindex','0');
+    el.setAttribute('role','button');
+    function toggle(){ el.classList.toggle('done'); }
+    el.addEventListener('click', toggle);
+    el.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+    });
+  });
+</script>
+
+</body>
+</html>
